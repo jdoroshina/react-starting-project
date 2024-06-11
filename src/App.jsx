@@ -1,11 +1,16 @@
+in
+
 import { CORE_CONCEPTS } from "./data.js";
 import Header from "./components/Header/Header.jsx";
 import CoreConcept from "./components/CoreConcepr.jsx";
 import TabButton from "./components/TabButton.jsx";
 
 function App() {
-  function handleClick() {
-    console.log('Hello world!');
+
+  let tabContent = 'Please click a button';
+  function handleClick(selectedButton) {
+    //selectedButton => 'components', 'jsx', 'props', 'state'
+    console.log(selectedButton);
   }
 
   return (
@@ -32,13 +37,13 @@ function App() {
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            <TabButton onClick={handleClick}>Copmonents</TabButton> 
+            <TabButton onClick={() => handleClick('components')}>Copmonents</TabButton> 
             {/* this way of building Components where your Components can wrap other Components or other content is called component composition. */}
-            <TabButton onClick={handleClick}>JSX</TabButton> 
-            <TabButton onClick={handleClick}>Props</TabButton> 
-            <TabButton onClick={handleClick}>State</TabButton> 
+            <TabButton onClick={() => handleClick('jsx')}>JSX</TabButton> 
+            <TabButton onClick={() => handleClick('props')}>Props</TabButton> 
+            <TabButton onClick={() => handleClick('state')}>State</TabButton> 
           </menu>
-          
+
         </section>
       </main>
     </div>
