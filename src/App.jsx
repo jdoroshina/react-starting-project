@@ -1,19 +1,33 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 import { CORE_CONCEPTS } from "./data.js";
-import { EXAMPLES } from './data.js'
+import { EXAMPLES } from "./data.js";
 import Header from "./components/Header/Header.jsx";
 import CoreConcept from "./components/CoreConcepr.jsx";
 import TabButton from "./components/TabButton.jsx";
 
 function App() {
-  const [ selectedTopic, setSelectedTopic] = useState('components');
+  const [selectedTopic, setSelectedTopic] = useState("");
 
   function handleClick(selectedButton) {
     //selectedButton => 'components', 'jsx', 'props', 'state'
     setSelectedTopic(selectedButton);
     console.log(selectedTopic);
   }
+
+  // #3 way to render content
+  // let tabContent = <p>Please select a topic.</p>;
+  // if (selectedTopic) {
+  //   tabContent = (
+  //     <div id="tab-content">
+  //       <h3>{EXAMPLES[selectedTopic].title}</h3>
+  //       <p>{EXAMPLES[selectedTopic].description}</p>
+  //       <pre>
+  //         <code>{EXAMPLES[selectedTopic].code}</code>
+  //       </pre>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div>
@@ -39,21 +53,38 @@ function App() {
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            <TabButton onClick={() => handleClick('components')}>Copmonents</TabButton> 
+            <TabButton onClick={() => handleClick("components")}>
+              Copmonents
+            </TabButton>
             {/* this way of building Components where your Components can wrap other Components or other content is called component composition. */}
-            <TabButton onClick={() => handleClick('jsx')}>JSX</TabButton> 
-            <TabButton onClick={() => handleClick('props')}>Props</TabButton> 
-            <TabButton onClick={() => handleClick('state')}>State</TabButton> 
+            <TabButton onClick={() => handleClick("jsx")}>JSX</TabButton>
+            <TabButton onClick={() => handleClick("props")}>Props</TabButton>
+            <TabButton onClick={() => handleClick("state")}>State</TabButton>
           </menu>
-          <div id="tab-content">
+          {!selectedTopic ? (
+            <p>Please select a topic.</p>
+          ) : (
+            <div id="tab-content">
+              <h3>{EXAMPLES[selectedTopic].title}</h3>
+              <p>{EXAMPLES[selectedTopic].description}</p>
+              <pre>
+                <code>{EXAMPLES[selectedTopic].code}</code>
+              </pre>
+            </div>
+          )}
+          {/* #2 Can be used AND operator. Because the AND operator will actually output the value that comes after it if the condition in front of it yields true. */}
+          {/* {!selectedTopic && <p>Please select a topic.</p> }
+          {selectedTopic && (
+            <div id="tab-content">
             <h3>{EXAMPLES[selectedTopic].title}</h3>
             <p>{EXAMPLES[selectedTopic].description}</p>
             <pre>
-              <code>
-                {EXAMPLES[selectedTopic].code}
-              </code>
+              <code>{EXAMPLES[selectedTopic].code}</code>
             </pre>
           </div>
+          )} */}
+          {/* #3 render content through the variable.*/}
+          {/* {tabContent} */}
         </section>
       </main>
     </div>
