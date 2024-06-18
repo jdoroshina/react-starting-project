@@ -25,9 +25,14 @@ jobs:
       - name: Build
         run: npm run build
 
+      # Отладка: показываем содержимое папки dist после сборки
+      - name: List files in dist
+        run: ls -la dist
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4 # Обновлено до последней версии
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           folder: dist
           branch: gh-pages
+          verbose: true  # Включение подробного вывода
