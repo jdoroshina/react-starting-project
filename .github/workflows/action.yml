@@ -35,4 +35,3 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           folder: dist
           branch: gh-pages
-          verbose: true  # Включение подробного вывода
